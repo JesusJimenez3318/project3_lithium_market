@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Lithium Stock Dashboard</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin="" />
+
+  <!-- Our CSS -->
+  <link rel="stylesheet" type="text/css" href="static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 jumbotron text-center">
+                <h4 class="company-1">Company that produce lithium:</h4>
+                <select id="selCompany-1" onchange="optionChanged(this.value)"></select>
+            </div>
+            <div class="col-md-6 jumbotron text-center">
+                <h2 class="title">Description of Lithium and Use</h2>
+            </div>
+            <div class="col-md-3 jumbotron text-center">
+                <h4 class="company-2">Company that use lithium:</h4>
+                <select id="selCompany-2" onchange="optionChanged(this.value)"></select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div id="candle-1">
+                    <p>first candle chart</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div id="candle-2">
+                    <p>second candle chart</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div id="line-1">
+                    <p>first line chart</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div id="line-2">
+                    <p>second line chart</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div id="comparison">
+                    <p>comparison chart</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

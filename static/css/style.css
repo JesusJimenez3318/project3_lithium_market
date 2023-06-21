@@ -1,0 +1,30 @@
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+p {
+    text-align: center;
+    padding: auto 1em;
+    display: block;
+}
+
+#candle-1, #candle-2, #line-1, #line-2 {
+    height: 100%;
+    width: 100%;
+    border: 1px solid black;
+    padding: 200px;
+    margin: 50px 0px 25px 0px;
+}
+
+.col-md-12 {
+    height: 50%;
+}
+
+#comparison {
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    padding: 200px 50%;
+    margin: 25px 0px;
+}
