@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS GNENF;
 DROP TABLE IF EXISTS ALB;
 
 Create Table TSLA (
-	date date NOT NULL,
+	"date" date NOT NULL,
 	"Open" Float, 
 	"High" Float, 
 	"Low" FLoat,
@@ -20,7 +20,7 @@ Create Table TSLA (
 	"volume" Float);
 	
 Create Table SQM (
-	"date"date NOT NULL,
+	"date" date NOT NULL,
 	"Open" Float, 
 	"High" Float, 
 	"Low" FLoat,
@@ -31,7 +31,7 @@ Create Table SQM (
 	
 Create Table SGML (
 	"date" date NOT NULL,
-	"Open" Float, 
+	"OPEN" Float, 
 	"High" Float, 
 	"Low" FLoat,
 	"Close" Float, 
@@ -39,7 +39,7 @@ Create Table SGML (
 	"volume" Float);
 	
 Create Table Samsung (
-	"date"date NOT NULL,
+	"date" date NOT NULL,
 	"Open" Float, 
 	"High" Float, 
 	"Low" FLoat,
@@ -48,7 +48,7 @@ Create Table Samsung (
 	"volume" Float);
 	
 Create Table PILBF (
-	"date"date NOT NULL,
+	"date" date NOT NULL,
 	"Open" Float, 
 	"High" Float, 
 	"Low" FLoat,
@@ -57,7 +57,7 @@ Create Table PILBF (
 	"volume" Float);
 
 Create Table NIO (
-	"date"date NOT NULL,
+	"date" date NOT NULL,
 	"Open" Float, 
 	"High" Float, 
 	"Low" FLoat,
@@ -66,7 +66,7 @@ Create Table NIO (
 	"volume" Float);
 	
 Create Table MALRY (
-	"date"date NOT NULL,
+	"date" date NOT NULL,
 	"Open" Float, 
 	"High" Float, 
 	"Low" FLoat,
@@ -75,7 +75,7 @@ Create Table MALRY (
 	"volume" Float);	
 	
 Create Table LTHM (
-	"date"date NOT NULL,
+	"date" date NOT NULL,
 	"Open" Float, 
 	"High" Float, 
 	"Low" FLoat,
@@ -84,7 +84,7 @@ Create Table LTHM (
 	"volume" Float);
 	
 Create Table LAC (
-	"date"date NOT NULL,
+	"date" date NOT NULL,
 	"Open" Float, 
 	"High" Float, 
 	"Low" FLoat,
@@ -93,7 +93,7 @@ Create Table LAC (
 	"volume" Float);
 	
 Create Table GNENF (
-	"date"date NOT NULL,
+	"date" date NOT NULL,
 	"Open" Float, 
 	"High" Float, 
 	"Low" FLoat,
@@ -102,7 +102,7 @@ Create Table GNENF (
 	"volume" Float);
 	
 Create Table ALB (
-	"date"date NOT NULL,
+	"date" date NOT NULL,
 	"Open" Float, 
 	"High" Float, 
 	"Low" FLoat,
@@ -110,14 +110,3 @@ Create Table ALB (
 	"Adj Close" Float,
 	"volume" Float);
 
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-Select * from "Samsung";

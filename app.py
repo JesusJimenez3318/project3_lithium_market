@@ -1,15 +1,18 @@
 import datetime
 import sqlalchemy
+import pandas as pd
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
 
 from flask import Flask, jsonify
+from flask_cors import CORS
 
+#def stock_dictionary():
 #################################################
 # Database Setup
 #################################################
-engine = create_engine(f"postgresql+psycopg2://username:password@localhost:5432/Stocks")
+engine = create_engine(f"postgresql+psycopg2://your_user:your_password@localhost:5432/Stocks")
 
 # reflect an existing database into a new model
 Base = automap_base()
@@ -23,6 +26,7 @@ session = Session(engine)
 # Flask Setup
 #################################################
 app = Flask(__name__)
+CORS(app)
 
 #################################################
 # Flask Routes
@@ -61,6 +65,8 @@ def ALB():
         stock_dict["volume"] = results[6]
         stock.append(stock_dict)
     session.close()
+    # stock_pd = pd.DataFrame(stock)
+    # stock_pd = stock_pd.to_json(orient = "index", date_format = "iso")
     return jsonify(stock)
 
 @app.route('/api/v1.0/GNENF')
