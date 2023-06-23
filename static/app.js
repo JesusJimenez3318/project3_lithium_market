@@ -16,9 +16,77 @@
 //   };
 // let data = get_data('TSLA');
 //   console.log(data);
-get_data()
-function get_data(){
-d3.json(`http://127.0.0.1:5000/api/v1.0/TSLA`)
+// function get_names(){
+//   names = d3.json('http://127.0.0.1:5000')
+//   console.log(names)
+//   console.log('Hello')
+// }
+
+//populate dropdown buttons from flask api homepage
+var extractedDataList = [];
+
+// Make a GET request to the Flask API
+fetch('http://127.0.0.1:5000')
+  .then(function(response) {
+    // Check if the response was successful
+    if (response.ok) {
+      // Extract the HTML content from the response
+      return response.text();
+    } else {
+      throw new Error('Error: ' + response.status);
+    }
+  })
+  .then(function(htmlContent) {
+    // Use a regular expression to extract the text lines between the <a> tags
+    var regex = /<a[^>]*>([^<]+)<\/a>/g;
+    var match;
+    while ((match = regex.exec(htmlContent)) !== null) {
+      extractedDataList.push(match[1]);
+    }
+
+    // Perform any further operations with the extractedDataList
+    function buttonFill(){
+
+      for (let i=0; i < extractedDataList.length; i++){
+          d3.select("#selCompany-1").append("option").text(extractedDataList[i])
+      }
+      for (let i=0; i < extractedDataList.length; i++){
+        d3.select("#selCompany-2").append("option").text(extractedDataList[i])
+    }
+
+  };
+  buttonFill();
+  })
+  .catch(function(error) {
+    // Handle any errors that occurred during the request
+    console.error('Error:', error);
+  });
+
+  const dropDown = d3.select('#selCompany-1');
+  let options;
+  const dropDown2 = d3.select('#selCompany-2');
+  let options2;
+
+function optionChanged(newPick) {
+  return newPick;
+};
+
+dropDown.on("change", function() {
+  let newPick = dropDown.property('value');
+  newPick = optionChanged(newPick);
+  get_data(newPick);
+});
+
+dropDown2.on("change", function() {
+  let newPick = dropDown2.property('value');
+  newPick = optionChanged(newPick);
+  get_data(newPick);
+  console.log(newPick)
+});
+
+
+function get_data(stock){
+d3.json(`http://127.0.0.1:5000/api/v1.0/${stock}`)
 .then(data=>
 
 
@@ -39,7 +107,7 @@ d3.json(`http://127.0.0.1:5000/api/v1.0/TSLA`)
         dataArray.push(data[i].high)
         stockArray.push(dataArray)
      }
-    console.log(stockArray)
+    
 
 var dom = document.getElementById('candle-1');
 var myChart = echarts.init(dom, null, {
