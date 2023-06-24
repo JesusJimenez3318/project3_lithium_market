@@ -12,7 +12,7 @@ from flask_cors import CORS
 #################################################
 # Database Setup
 #################################################
-engine = create_engine(f"postgresql+psycopg2://your_user:your_password@localhost:5432/Stocks")
+engine = create_engine(f"postgresql+psycopg2://postgres:Zangetsu8217@localhost:5432/Stocks")
 
 # reflect an existing database into a new model
 Base = automap_base()
@@ -47,6 +47,7 @@ def home():
         "<a href='http://127.0.0.1:5000/api/v1.0/SGML'>SGML</a><br/>"
         "<a href='http://127.0.0.1:5000/api/v1.0/SQM'>SQM</a><br/>"
         "<a href='http://127.0.0.1:5000/api/v1.0/TSLA'>TSLA</a><br/>"
+        "<a href='http://127.0.0.1:5000/api/v1.0/UNION'>UNION</a><br/>"
     )
 
 @app.route('/api/v1.0/ALB')
@@ -248,6 +249,46 @@ def TSLA():
         stock_dict["volume"] = results[6]
         stock.append(stock_dict)
     session.close()
+    return jsonify(stock)
+
+@app.route('/api/v1.0/UNION')
+def UNION():
+    session = Session(engine)
+    stock = []
+    stock_data = engine.execute(    
+        """select * From alb 
+            union all 
+        select * From gnenf 
+            union all 
+        select * from lac 
+            union all 
+        select * From lthm 
+            union all  
+        select * From malry 
+            union all 
+        select * from nio 
+            union all   
+        select * From pilbf 
+            union all   
+        select * from sgml 
+            union all 
+        select * From sqm 
+            union all 
+        select * From tsla"""
+        ) 
+    for results in stock_data:
+        stock_dict = {}
+        stock_dict["date"] = results[0]
+        stock_dict["open"] = results[1]
+        stock_dict["high"] = results[2]
+        stock_dict["low"] = results[3]
+        stock_dict["close"] = results[4]
+        stock_dict["adj_close"] = results[5]
+        stock_dict["volume"] = results[6]
+        stock_dict["Ticker"] = results[7]
+        stock.append(stock_dict)
+    session.close()
+
     return jsonify(stock)
 
 if __name__ == '__main__':

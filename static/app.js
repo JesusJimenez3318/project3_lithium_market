@@ -1,33 +1,29 @@
-// let get_data = async () => {
-//   let response = await fetch(`http://127.0.0.1:5000/api/v1.0/ALB`);
-//   let data = await response.json();
-//   console.log(data)
-//   return data;
-// };
-
-
-// let get_data = (table_name) => {
-//     let xhr = new XMLHttpRequest();
-//     xhr.open('GET', `http://127.0.0.1:5000/api/v1.0/${table_name}`);
-//     xhr.onload = () => {let data = JSON.parse(xhr.responseText);
-//         console.log(data);
-//     };
-//     xhr.send();
-//   };
-// let data = get_data('TSLA');
-//   console.log(data);
-// function get_names(){
-//   names = d3.json('http://127.0.0.1:5000')
-//   console.log(names)
-//   console.log('Hello')
-// }
+// Top menu bar
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+var menuBar = document.getElementById("myTopnav");
+var btns = menuBar.getElementsByClassName("btn");
+console.group(btns);
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function() {
+  var current = document.getElementsByClassName("active");
+  current[0].className = current[0].className.replace(" active", "");
+  this.className += " active";
+  });
+}
 
 //populate dropdown buttons from flask api homepage
 var extractedDataList = [];
-
+get_data('ALB')
 // Make a GET request to the Flask API
 fetch('http://127.0.0.1:5000')
-  .then(function(response) {
+  .then(function(response) { 
     // Check if the response was successful
     if (response.ok) {
       // Extract the HTML content from the response
@@ -80,7 +76,7 @@ dropDown.on("change", function() {
 dropDown2.on("change", function() {
   let newPick = dropDown2.property('value');
   newPick = optionChanged(newPick);
-  get_data(newPick);
+  get_data2(newPick);
   console.log(newPick)
 });
 
@@ -125,7 +121,9 @@ const downBorderColor = '#008F28';
 // Each item: open，close，lowest，highest
 const data0 = splitData(stockArray);
 
+let tickName = d3.select('#selCompany-1').node().value
 
+console.log(tickName);
 function splitData(rawData) {
   const categoryData = [];
   const values = [];
@@ -155,7 +153,7 @@ function calculateMA(dayCount) {
 }
 option = {
   title: {
-    text: 'Ticker Name Here',
+    text: tickName,
     left: 0
   },
   tooltip: {
@@ -165,7 +163,7 @@ option = {
     }
   },
   legend: {
-    data: ['ticker name', 'MA5', 'MA10', 'MA20', 'MA30']
+    data: [tickName, 'MA5', 'MA10', 'MA20', 'MA30']
   },
   grid: {
     left: '10%',
@@ -203,7 +201,7 @@ option = {
   ],
   series: [
     {
-      name: 'ticker name',
+      name: tickName,
       type: 'candlestick',
       data: data0.values,
       itemStyle: {
@@ -343,4 +341,160 @@ window.addEventListener('resize', myChart.resize);
 
 }
 )}
+/////////////////////////////////////////////////////////////
+get_line()
+//line graph
+function get_line(){
+  d3.json(`http://127.0.0.1:5000/api/v1.0/UNION`)
+  .then(data=>
+    
+// NEED TO ADD A NEW COLUMN TO CALCULATE GAIN FOR ALL COMPANIES, THIS VALUE NEEDS 
+// TO BE CREATED IN THE SQL QUERY AND THEN ADDED TO THE FLASK. (IF YOU WANT TO MAKE
+// THIS CHART MAKE MORE SENSE)
+   {
+    dateArray = []
+    nameArray = []
+    albArray = []
+    gnenfArray = []
+    lacArray = []
+    lthmAArray = []
+    malryArray = []
+    nioArray = []
+    pilbfArray = []
+    sgmlArray = []
+    sqmArray = []
+    tslaArray = []
 
+      for (x of data ){
+      
+        x.Ticker == 'ALB' ? albArray.push(x.adj_close):
+        x.Ticker == 'GNENF' ? gnenfArray.push(x.adj_close):
+        x.Ticker == 'LAC' ? lacArray.push(x.adj_close):
+        x.Ticker == 'LTHM' ? lthmAArray.push(x.adj_close):
+        x.Ticker == 'MALRY' ? malryArray.push(x.adj_close):
+        x.Ticker == 'NIO' ? nioArray.push(x.adj_close):
+        x.Ticker == 'PILBF' ? pilbfArray.push(x.adj_close):
+        x.Ticker == 'SGML' ? sgmlArray.push(x.adj_close):
+        x.Ticker == 'SQM' ? sqmArray.push(x.adj_close):
+        x.Ticker == 'TSLA' ? tslaArray.push(x.adj_close): 
+        x.date == 'ALB' ? dateArray.push(x.date):"Ticker"
+      
+    }
+      let tickArray = []
+      for (const i in data) {
+        //dateArray.push(data[i].date)
+        tickArray.push(data[i].Ticker)
+      }
+      
+
+
+var dom = document.getElementById('line-1');
+var myChart = echarts.init(dom, null, {
+  renderer: 'canvas',
+  useDirtyRect: false
+});
+
+
+var app = {};
+
+var option;
+
+option = {
+  title: {
+    text: 'Stacked Line'
+  },
+  tooltip: {
+    trigger: 'axis'
+  },
+  legend: {
+    data: ['ALB','GNENF','LAC','LTHM','MALRY','NIO','PILBF','SQML','SQM','TSLA']
+  },
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
+  },
+  toolbox: {
+    feature: {
+      saveAsImage: {}
+    }
+  },
+  xAxis: {
+    type: 'category',
+    boundaryGap: false,
+    data: dateArray
+  },
+  yAxis: {
+    type: 'value'
+  },
+  series: [
+    {
+      name: 'ALB',
+      type: 'line',
+      stack: 'Total',
+      data: albArray
+    },
+    {
+      name: 'GNENF',
+      type: 'line',
+      stack: 'Total',
+      data: gnenfArray
+    },
+    {
+      name: 'LAC',
+      type: 'line',
+      stack: 'Total',
+      data: lacArray
+    },
+    {
+      name: 'LTHM',
+      type: 'line',
+      stack: 'Total',
+      data: lthmAArray
+    },
+    {
+      name: 'MALRY',
+      type: 'line',
+      stack: 'Total',
+      data: malryArray
+    },
+    {
+      name: 'NIO',
+      type: 'line',
+      stack: 'Total',
+      data: nioArray
+    },
+    {
+      name: 'PILBF',
+      type: 'line',
+      stack: 'Total',
+      data: pilbfArray
+    },
+    {
+      name: 'SQML',
+      type: 'line',
+      stack: 'Total',
+      data: sgmlArray
+    },
+    {
+      name: 'SQM',
+      type: 'line',
+      stack: 'Total',
+      data: sqmArray
+    },
+    {
+      name: 'TSLA',
+      type: 'line',
+      stack: 'Total',
+      data:tslaArray
+    }
+  ]
+};
+      
+if (option && typeof option === 'object') {
+  myChart.setOption(option);
+}
+
+window.addEventListener('resize', myChart.resize);
+})}
