@@ -112,3 +112,13 @@ p {
   height: 80vh;
   overflow: hidden;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+}
+#bar-chart {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}

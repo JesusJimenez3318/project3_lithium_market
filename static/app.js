@@ -498,3 +498,316 @@ if (option && typeof option === 'object') {
 
 window.addEventListener('resize', myChart.resize);
 })}
+
+/////////////////////////////////////////////////////////////////
+
+// Bar Chart 
+
+get_bar()
+//line graph
+function get_bar(){
+  d3.json(`http://127.0.0.1:5000/api/v1.0/Stock_2`)
+  .then(data=>
+{
+    albArray = []
+    albDate = new Set([])
+    gnenfArray = []
+    gnenfDate = new Set([])
+    lacArray = []
+    lacDate = new Set([])
+    lthmArray = []
+    lthmDate = new Set([])
+    malryArray = []
+    malryDate = new Set([])
+    nioArray = []
+    nioDate = new Set([])
+    pilbfArray = []
+    pilbfDate = new Set([])
+    sgmlArray = []
+    sgmlDate = new Set([])
+    sqmArray = []
+    sqmDate = new Set([])
+    tslaArray = []
+    tslaDate = new Set([])
+
+      for (x of data ){
+      
+        x.ticker == 'ALB' ? albArray.push(x.adj_close): albDate.add(x.years);
+        x.ticker == 'GNENF' ? gnenfArray.push(x.adj_close): gnenfDate.add(x.years);
+        x.ticker == 'LAC' ? lacArray.push(x.adj_close): lacDate.add(x.years);
+        x.ticker == 'LTHM' ? lthmArray.push(x.adj_close): lthmDate.add(x.years);
+        x.ticker == 'MALRY' ? malryArray.push(x.adj_close): malryDate.add(x.years);
+        x.ticker == 'NIO' ? nioArray.push(x.adj_close): nioDate.add(x.years);
+        x.ticker == 'PILBF' ? pilbfArray.push(x.adj_close): pilbfDate.add(x.years);
+        x.ticker == 'SGMML' ? sgmlArray.push(x.adj_close): sgmlDate.add(x.years);
+        x.ticker == 'SQM' ? sqmArray.push(x.adj_close): sqmDate.add(x.years);
+        x.ticker == 'TSLA' ? tslaArray.push(x.adj_close): tslaDate.add(x.years);
+       
+        console.log("data does not exist")
+      
+    }
+
+console.log(tslaArray)
+console.log(data)
+var dom = document.getElementById('bar-chart');
+var myChart = echarts.init(dom, null, {
+  renderer: 'canvas',
+  useDirtyRect: false
+});
+var app = {};
+
+var option;
+
+option = {
+  xAxis: {
+    data: ['GNENF', 'LAC', "LTHM", 'ALB','MALRY','NIO','PILBF','SGML','SQM','TSLA']
+  },
+  yAxis: {},
+  dataGroupId: '',
+  animationDurationUpdate: 800,
+  series: {
+    type: 'bar',
+    id: 'sales',
+    data: [
+      {
+        value: 23,
+        groupId: 'GNENF'
+      },
+      {
+        value: 41,
+        groupId: 'LAC'
+      },
+      {
+        value: 35,
+        groupId: 'LTHM'
+      },
+      {
+        value: 350,
+        groupId: 'ALB'
+      },
+      {
+        value: 67,
+        groupId: 'MALRY'
+      },
+      {
+        value: 63,
+        groupId: 'NIO'
+      },
+      {
+        value: 4,
+        groupId: 'PILBF'
+      },
+      {
+        value: 42,
+        groupId: 'SGML'
+      },
+      {
+        value: 102,
+        groupId: 'SQM'
+      },
+      {
+        value: 409,
+        groupId: 'TSLA'
+      },
+    ],
+    universalTransition: {
+      enabled: true,
+      divideShape: 'clone'
+    }
+  }
+};
+const drilldownData = [
+  {
+    dataGroupId: 'GNENF',
+    data: [
+      ['2019', gnenfArray[0]],
+      ['2020', gnenfArray[1]],
+      ['2021', gnenfArray[2]],
+      ['2022', gnenfArray[3]],
+      ['2023', gnenfArray[4]]
+    ]
+  },
+  {
+    dataGroupId: 'LAC',
+    data: [
+      ['2010', lacArray[0]],
+      ['2011', lacArray[1]],
+      ['2012', lacArray[2]],
+      ['2013', lacArray[3]],
+      ['2014', lacArray[4]],
+      ['2015', lacArray[5]],
+      ['2016', lacArray[6]],
+      ['2017', lacArray[7]],
+      ['2018', lacArray[8]],
+      ['2019', lacArray[9]],     
+      ['2020', lacArray[10]],
+      ['2021', lacArray[11]],
+      ['2022', lacArray[12]],
+      ['2023', lacArray[13]]
+     
+    ]
+  },
+  {
+    dataGroupId: 'LTHM',
+    data: [
+      ['2018', lthmArray[0]],
+      ['2019', lthmArray[1]],     
+      ['2020', lthmArray[2]],
+      ['2021', lthmArray[3]],
+      ['2022', lthmArray[4]],
+      ['2023', lthmArray[5]]
+    ]
+  },
+  {
+    dataGroupId: 'ALB',
+    data: [
+      [albDate[5], albArray[0]],
+      [albDate[6], albArray[1]],
+      [albDate[7], albArray[2]],
+      [albDate[8], albArray[3]],
+      [albDate[9], albArray[4]],
+      [albDate[10], albArray[5]],
+      [albDate[11], albArray[6]],
+      [albDate[12], albArray[7]],
+      [albDate[13], albArray[8]],
+      [albDate[1], albArray[9]],
+      [albDate[2], albArray[10]],
+      [albDate[3], albArray[11]],
+      [albDate[4], albArray[12]],
+      [albDate[5], albArray[13]]
+    ]
+  },
+  {
+    dataGroupId: 'MALRY',
+    data: [
+
+      ['2022', malryArray[0]],
+      ['2023', malryArray[1]]
+    ]
+  },
+  {
+    dataGroupId: 'NIO',
+    data: [
+      ['2018', nioArray[0]],
+      ['2019', nioArray[1]],     
+      ['2020', nioArray[2]],
+      ['2021', nioArray[3]],
+      ['2022', nioArray[4]],
+      ['2023', nioArray[5]]
+    ]
+  },
+  {
+    dataGroupId: 'PILBF',
+    data: [
+      ['2016', pilbfArray[0]],
+      ['2017', pilbfArray[1]],
+      ['2018', pilbfArray[2]],
+      ['2019', pilbfArray[3]],     
+      ['2020', pilbfArray[4]],
+      ['2021', pilbfArray[5]],
+      ['2022', pilbfArray[6]],
+      ['2023', pilbfArray[7]]
+    ]
+  },
+  {
+    dataGroupId: 'SGML',
+    data: [
+      ['2018', sgmlArray[0]],
+      ['2019', sgmlArray[1]],
+      ['2020', sgmlArray[2]],
+      ['2021', sgmlArray[3]],
+      ['2022', sgmlArray[4]],
+      ['2023', sgmlArray[5]]
+    ]
+  },
+  {
+    dataGroupId: 'SQM',
+    data: [
+      ['2010', sqmArray[0]],
+      ['2011', sqmArray[1]],
+      ['2012', sqmArray[2]],
+      ['2013', sqmArray[3]],
+      ['2014', sqmArray[4]],
+      ['2015', sqmArray[5]],
+      ['2016', sqmArray[6]],
+      ['2017', sqmArray[7]],
+      ['2018', sqmArray[8]],
+      ['2019', sqmArray[9]],     
+      ['2020', sqmArray[10]],
+      ['2021', sqmArray[11]],
+      ['2022', sqmArray[12]],
+      ['2023', sqmArray[13]]
+    ]
+  },
+  {
+    dataGroupId: 'TSLA',
+    data: [
+      ['2010', tslaArray[0]],
+      ['2011', tslaArray[1]],
+      ['2012', tslaArray[2]],
+      ['2013', tslaArray[3]],
+      ['2014', tslaArray[4]],
+      ['2015', tslaArray[5]],
+      ['2016', tslaArray[6]],
+      ['2017', tslaArray[7]],
+      ['2018', tslaArray[8]],
+      ['2019', tslaArray[9]],     
+      ['2020', tslaArray[10]],
+      ['2021', tslaArray[11]],
+      ['2022', tslaArray[12]],
+      ['2023', tslaArray[13]]
+    ]
+  }
+];
+myChart.on('click', function (event) {
+  if (event.data) {
+    var subData = drilldownData.find(function (data) {
+      return data.dataGroupId === event.data.groupId;
+    });
+    if (!subData) {
+      return;
+    }
+    myChart.setOption({
+      xAxis: {
+        data: subData.data.map(function (item) {
+          return item[0];
+        })
+      },
+      series: {
+        type: 'bar',
+        id: 'sales',
+        dataGroupId: subData.dataGroupId,
+        data: subData.data.map(function (item) {
+          return item[1];
+        }),
+        universalTransition: {
+          enabled: true,
+          divideShape: 'clone'
+        }
+      },
+      graphic: [
+        {
+          type: 'text',
+          left: 50,
+          top: 20,
+          style: {
+            text: 'Back',
+            fontSize: 18
+          },
+          onclick: function () {
+            myChart.setOption(option);
+          }
+        }
+      ]
+    });
+  }
+});
+
+if (option && typeof option === 'object') {
+  myChart.setOption(option);
+}
+
+window.addEventListener('resize', myChart.resize);
+
+ })
+}

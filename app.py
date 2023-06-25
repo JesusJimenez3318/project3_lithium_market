@@ -48,6 +48,7 @@ def home():
         "<a href='http://127.0.0.1:5000/api/v1.0/SQM'>SQM</a><br/>"
         "<a href='http://127.0.0.1:5000/api/v1.0/TSLA'>TSLA</a><br/>"
         "<a href='http://127.0.0.1:5000/api/v1.0/UNION'>UNION</a><br/>"
+        "<a href='http://127.0.0.1:5000/api/v1.0/Stock_2'>Stock_2</a><br/>"
     )
 
 @app.route('/api/v1.0/ALB')
@@ -288,8 +289,23 @@ def UNION():
         stock_dict["Ticker"] = results[7]
         stock.append(stock_dict)
     session.close()
-
     return jsonify(stock)
+
+@app.route('/api/v1.0/Stock_2')
+def Stock_2():
+    session = Session(engine)
+    stock = []
+    stock_data = engine.execute("SELECT * FROM Stock_2")
+    for results in stock_data:
+        stock_dict = {}
+        stock_dict["ticker"] = results[0]
+        stock_dict["years"] = results[1]
+        stock_dict["adj_close"] = results[2]
+        stock.append(stock_dict)
+    session.close()
+    return jsonify(stock)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
