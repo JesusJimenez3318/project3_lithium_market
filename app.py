@@ -12,7 +12,7 @@ from flask_cors import CORS
 #################################################
 # Database Setup
 #################################################
-engine = create_engine(f"postgresql+psycopg2://postgres:Zangetsu8217@localhost:5432/Stocks")
+engine = create_engine(f"postgresql+psycopg2://postgres:your_password@localhost:5432/Stocks")
 
 # reflect an existing database into a new model
 Base = automap_base()
