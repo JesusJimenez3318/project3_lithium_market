@@ -257,25 +257,9 @@ def UNION():
     session = Session(engine)
     stock = []
     stock_data = engine.execute(    
-        """select * From alb 
-            union all 
-        select * From gnenf 
-            union all 
-        select * from lac 
-            union all 
-        select * From lthm 
-            union all  
-        select * From malry 
-            union all 
-        select * from nio 
-            union all   
-        select * From pilbf 
-            union all   
-        select * from sgml 
-            union all 
-        select * From sqm 
-            union all 
-        select * From tsla"""
+        """
+        select * from union_pct
+        """
         ) 
     for results in stock_data:
         stock_dict = {}
@@ -287,6 +271,7 @@ def UNION():
         stock_dict["adj_close"] = results[5]
         stock_dict["volume"] = results[6]
         stock_dict["Ticker"] = results[7]
+        stock_dict['pct_change'] = results[8]
         stock.append(stock_dict)
     session.close()
     return jsonify(stock)

@@ -1,3 +1,7 @@
+ALTER Table tsla
+ADD ticker varchar(10)
+default 'TSLA';
+
 CREATE TABLE stock_2 (
 Ticker varchar(15),
 years varchar(20),
@@ -38,6 +42,63 @@ order by Ticker, years asc
 
 select * FROM stock_2
 
+-- create table union_pct as (
+-- with etc as (
+-- select *, lag(adj_close, 1) over(partition by ticker order by date) as next_day
+-- from (select * From alb 
+-- 	  union all
+-- 	  select * From gnenf 
+--       union all 
+--       select * from lac 
+--       union all 
+--       select * From lthm 
+--       union all  
+--       select * From malry 
+--       union all 
+--       select * from nio 
+--       union all   
+--       select * From pilbf 
+--       union all   
+--       select * from sgml 
+--       union all 
+--       select * From sqm 
+--       union all 
+--       select * From tsla) as b)
 
+-- select date, open, high, low, close, adj_close, volume, ticker, (next_day - adj_close)/adj_close as pct_change
+-- from etc
+-- );
 
+-- update union_pct
+-- set pct_change = 0
+-- where pct_change is null;
 
+create table union_pct as (
+with etc as (
+select *
+from (select * From alb 
+	  union all
+	  select * From gnenf 
+      union all 
+      select * from lac 
+      union all 
+      select * From lthm 
+      union all  
+      select * From malry 
+      union all 
+      select * from nio 
+      union all   
+      select * From pilbf 
+      union all   
+      select * from sgml 
+      union all 
+      select * From sqm 
+      union all 
+      select * From tsla) as b
+)
+
+select date, open, high, low, close, adj_close, volume, ticker, (adj_close/first_value)-1 as pct_change
+from (
+	select *, first_value(adj_close) over(partition by ticker order by date) as first_value
+	from etc) as d
+);

@@ -93,7 +93,7 @@ p {
 #candle-1, #line-1, #comparison {
   height: 90%;
   width: 80%;
-  border: 1px solid black;
+/*  border: 1px solid black; */
   padding: 0px;
   margin: 15px auto;
 }
