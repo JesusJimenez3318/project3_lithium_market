@@ -549,7 +549,7 @@ function get_bar(){
 
 console.log(tslaArray)
 console.log(data)
-var dom = document.getElementById('bar-chart');
+var dom = document.getElementById('comparison');
 var myChart = echarts.init(dom, null, {
   renderer: 'canvas',
   useDirtyRect: false
