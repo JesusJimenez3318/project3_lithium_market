@@ -43,12 +43,9 @@ fetch('http://127.0.0.1:5000')
     // Perform any further operations with the extractedDataList
     function buttonFill(){
 
-      for (let i=0; i < extractedDataList.length; i++){
+      for (let i=0; i < extractedDataList.length-2; i++){
           d3.select("#selCompany-1").append("option").text(extractedDataList[i])
       }
-      for (let i=0; i < extractedDataList.length; i++){
-        d3.select("#selCompany-2").append("option").text(extractedDataList[i])
-    }
 
   };
   buttonFill();

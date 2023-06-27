@@ -86,6 +86,9 @@ p {
 }
 #desc p {
   text-align: left;
+  overflow-wrap: break-word;
+  inline-size: auto;
+  line-height: 2em;
 }
 #line-chart h2 {
   margin-left: 15px;
