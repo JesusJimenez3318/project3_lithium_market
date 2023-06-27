@@ -1,7 +1,7 @@
 # **Project 3: Lithium Stock Market Analysis**
 
 <div style="background-color: #f0f0f0; padding: 10px;">
-<strong>Team:</strong> Alex Bolinger, Borna Karimi, Estelle Santini, Jesus Jimenez, Nick Wetherell, Shih-Hsien Ma
+<strong>Team:</strong>Borna Karimi, Estelle Santini, Jesus Jimenez, Nick Wetherell, Shih-Hsien Ma
 <br/>
 <strong>Program:</strong> Berkeley Data Analytics Bootcamp
 <br/>
