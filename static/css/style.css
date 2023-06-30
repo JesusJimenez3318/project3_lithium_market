@@ -86,14 +86,17 @@ p {
 }
 #desc p {
   text-align: left;
+  overflow-wrap: break-word;
+  inline-size: auto;
+  line-height: 2em;
 }
 #line-chart h2 {
   margin-left: 15px;
 }
 #candle-1, #line-1, #comparison {
-  height: 100%;
-  width: 90%;
-  border: 1px solid black;
+  height: 90%;
+  width: 80%;
+/*  border: 1px solid black; */
   padding: 0px;
   margin: 15px auto;
 }

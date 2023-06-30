@@ -43,12 +43,9 @@ fetch('http://127.0.0.1:5000')
     // Perform any further operations with the extractedDataList
     function buttonFill(){
 
-      for (let i=0; i < extractedDataList.length; i++){
+      for (let i=0; i < extractedDataList.length-2; i++){
           d3.select("#selCompany-1").append("option").text(extractedDataList[i])
       }
-      for (let i=0; i < extractedDataList.length; i++){
-        d3.select("#selCompany-2").append("option").text(extractedDataList[i])
-    }
 
   };
   buttonFill();
@@ -352,7 +349,6 @@ function get_line(){
 // TO BE CREATED IN THE SQL QUERY AND THEN ADDED TO THE FLASK. (IF YOU WANT TO MAKE
 // THIS CHART MAKE MORE SENSE)
    {
-    dateArray = []
     nameArray = []
     albArray = []
     gnenfArray = []
@@ -365,28 +361,34 @@ function get_line(){
     sqmArray = []
     tslaArray = []
 
-      for (x of data ){
+      for (x of data){
       
-        x.Ticker == 'ALB' ? albArray.push(x.adj_close):
-        x.Ticker == 'GNENF' ? gnenfArray.push(x.adj_close):
-        x.Ticker == 'LAC' ? lacArray.push(x.adj_close):
-        x.Ticker == 'LTHM' ? lthmAArray.push(x.adj_close):
-        x.Ticker == 'MALRY' ? malryArray.push(x.adj_close):
-        x.Ticker == 'NIO' ? nioArray.push(x.adj_close):
-        x.Ticker == 'PILBF' ? pilbfArray.push(x.adj_close):
-        x.Ticker == 'SGML' ? sgmlArray.push(x.adj_close):
-        x.Ticker == 'SQM' ? sqmArray.push(x.adj_close):
-        x.Ticker == 'TSLA' ? tslaArray.push(x.adj_close): 
-        x.date == 'ALB' ? dateArray.push(x.date):"Ticker"
-      
+        x.Ticker == 'ALB' ? albArray.push(x.pct_change):
+        x.Ticker == 'GNENF' ? gnenfArray.push(x.pct_change):
+        x.Ticker == 'LAC' ? lacArray.push(x.pct_change):
+        x.Ticker == 'LTHM' ? lthmAArray.push(x.pct_change):
+        x.Ticker == 'MALRY' ? malryArray.push(x.pct_change):
+        x.Ticker == 'NIO' ? nioArray.push(x.pct_change):
+        x.Ticker == 'PILBF' ? pilbfArray.push(x.pct_change):
+        x.Ticker == 'SGML' ? sgmlArray.push(x.pct_change):
+        x.Ticker == 'SQM' ? sqmArray.push(x.pct_change):
+        x.Ticker == 'TSLA' ? tslaArray.push(x.pct_change): "Ticker"
     }
       let tickArray = []
       for (const i in data) {
         //dateArray.push(data[i].date)
         tickArray.push(data[i].Ticker)
       }
-      
 
+      let dateArray = []
+      for (x of data) {
+        if (x.Ticker === 'ALB') {
+          dateArray.push(x.date)
+        }
+      }
+
+      
+console.log(dateArray);
 
 var dom = document.getElementById('line-1');
 var myChart = echarts.init(dom, null, {
@@ -401,7 +403,7 @@ var option;
 
 option = {
   title: {
-    text: 'Stacked Line'
+    text: 'Changed Adj Close'
   },
   tooltip: {
     trigger: 'axis'
@@ -549,7 +551,7 @@ function get_bar(){
 
 console.log(tslaArray)
 console.log(data)
-var dom = document.getElementById('bar-chart');
+var dom = document.getElementById('comparison');
 var myChart = echarts.init(dom, null, {
   renderer: 'canvas',
   useDirtyRect: false
@@ -661,20 +663,20 @@ const drilldownData = [
   {
     dataGroupId: 'ALB',
     data: [
-      [albDate[5], albArray[0]],
-      [albDate[6], albArray[1]],
-      [albDate[7], albArray[2]],
-      [albDate[8], albArray[3]],
-      [albDate[9], albArray[4]],
-      [albDate[10], albArray[5]],
-      [albDate[11], albArray[6]],
-      [albDate[12], albArray[7]],
-      [albDate[13], albArray[8]],
-      [albDate[1], albArray[9]],
-      [albDate[2], albArray[10]],
-      [albDate[3], albArray[11]],
-      [albDate[4], albArray[12]],
-      [albDate[5], albArray[13]]
+      ['2010', albArray[0]],
+      ['2011', albArray[1]],
+      ['2012', albArray[2]],
+      ['2013', albArray[3]],
+      ['2014', albArray[4]],
+      ['2015', albArray[5]],
+      ['2016', albArray[6]],
+      ['2017', albArray[7]],
+      ['2018', albArray[8]],
+      ['2019', albArray[9]],
+      ['2020', albArray[10]],
+      ['2021', albArray[11]],
+      ['2022', albArray[12]],
+      ['2023', albArray[13]]
     ]
   },
   {

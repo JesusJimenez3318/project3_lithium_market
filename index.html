@@ -32,10 +32,17 @@
         <div class="row" id="desc">
             <h1 class="project-title">Project 3 Lithium Stock Dashboard</h1>
             <h4>Team Member:</h4>
-            <p class="memberlist">Alex Bolinger, Borna Karimi, Estelle Santini, Jesus Jimenez, Nick Wetherell, Shih-Hsien Ma</p>
+            <p class="memberlist">Borna Karimi, Estelle Santini, Jesus Jimenez, Nick Wetherell, Shih-Hsien Ma</p>
             <br><br>
             <h2>Description of Lithium Market and Use</h2>
-            <p class="desc-content">Add some intro here...</p>
+            <p class="desc-content">Lithium stocks are shares of companies that are involved in producing, supplying, or using lithium, 
+                a crucial element to lithium-ion batteries. These batteries are used extensively for various applications including electric vehicles, portable electronics, 
+                renewable energy solutions, aerospace, military defense, and medical devices.
+                The demand for for lithium has exponentially grown as a mineral due to it’s significance in clean energy and relevant fields. 
+                As a stock, it has equally grown in interest as investors recognize it’s potential for growth.
+            <br><br>
+                Users can interact with the graphs below by selecting stock(s) to visualize in the dropdown menu, selecting time ranges, zooming, and hovering over graphs.
+            </p>
         </div>
         <hr>
         <div class="row" id="candle-chart">
@@ -43,27 +50,21 @@
                 <h2>Candle Chart</h2>
                 <h4>Company Stock Ticker:</h4>
                 <select id="selCompany-1" onchange="optionChanged(this.value)"></select>
-                <div id="candle-1">
-                    <p>first candle chart</p>
-                </div>
+                <div id="candle-1"></div>
             </div>
         </div>
         <hr>
         <div class="row" id="line-chart">
             <h2>Time Series Line Chart</h2>
             <div class="float-child">
-                <div id="line-1">
-                    <p>first line chart</p>
-                </div>
+                <div id="line-1"></div>
             </div>
         </div>
         <hr>
         <div class="row" id="bar-chart">
             <div class="col-md-12">
                 <h2>Comparison Bar Chart</h2>
-                <div id="comparison">
-                    <p>comparison chart</p>
-                </div>
+                <div id="comparison"></div>
             </div>
         </div>
     </div>
